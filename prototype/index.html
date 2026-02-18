@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CBB Stats — Prototype</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #141b34;
+        --muted: #9aa4c1;
+        --text: #eef2ff;
+        --accent: #60a5fa;
+        --good: #22c55e;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background: linear-gradient(180deg, #070b17 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+      .top {
+        display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+      }
+      h1 { margin: 0; font-size: 1.6rem; }
+      .sub { color: var(--muted); margin-top: 6px; }
+      .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+      select, input, button {
+        background: #0f1630;
+        color: var(--text);
+        border: 1px solid #22305d;
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+      button { background: var(--accent); color: #041027; border: none; font-weight: 700; }
+      .grid { display: grid; gap: 12px; }
+      .kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top: 18px; }
+      .card {
+        background: linear-gradient(180deg, #131b36, var(--panel));
+        border: 1px solid #24345f;
+        border-radius: 14px;
+        padding: 14px;
+      }
+      .label { color: var(--muted); font-size: .85rem; }
+      .value { margin-top: 8px; font-size: 1.5rem; font-weight: 700; }
+      .delta { margin-top: 6px; color: var(--good); font-size: .9rem; }
+      .main { grid-template-columns: 1.8fr 1fr; margin-top: 12px; }
+      .chart {
+        height: 250px; border-radius: 10px; border: 1px dashed #3a4f85;
+        display: grid; place-items: center; color: var(--muted);
+        background: repeating-linear-gradient(
+          90deg,
+          rgba(96,165,250,0.08), rgba(96,165,250,0.08) 2px,
+          transparent 2px, transparent 36px
+        );
+      }
+      table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+      th, td { text-align: left; padding: 10px 6px; border-bottom: 1px solid #25345f; }
+      th { color: var(--muted); font-weight: 500; }
+      .pill {
+        display: inline-block; padding: 2px 8px; border-radius: 999px;
+        background: rgba(34,197,94,0.18); color: #8ef1ad; font-size: .78rem;
+      }
+      .footer { margin-top: 18px; color: var(--muted); font-size: .9rem; }
+      @media (max-width: 860px) { .main { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1>🏀 CBB Stats Dashboard (Prototype)</h1>
+          <div class="sub">A preview of what the final analytics product could look like.</div>
+        </div>
+        <div class="controls">
+          <select>
+            <option>Duke</option>
+            <option>Kansas</option>
+            <option>UConn</option>
+          </select>
+          <input type="date" value="2026-01-01" />
+          <input type="date" value="2026-02-15" />
+          <button>Apply</button>
+        </div>
+      </div>
+
+      <section class="grid kpis">
+        <article class="card"><div class="label">Pace</div><div class="value">71.8</div><div class="delta">▲ +2.1 vs last 10</div></article>
+        <article class="card"><div class="label">Off. Efficiency</div><div class="value">118.4</div><div class="delta">▲ +3.4</div></article>
+        <article class="card"><div class="label">Def. Efficiency</div><div class="value">97.9</div><div class="delta">▲ Top 12%</div></article>
+        <article class="card"><div class="label">Net Rating</div><div class="value">+20.5</div><div class="delta">▲ Elite tier</div></article>
+      </section>
+
+      <section class="grid main">
+        <article class="card">
+          <div class="label">Trend (Last 12 games)</div>
+          <div class="chart">Chart placeholder: Offensive vs Defensive Efficiency</div>
+        </article>
+        <article class="card">
+          <div class="label">Recent Games</div>
+          <table>
+            <thead><tr><th>Opponent</th><th>Result</th><th>Net</th></tr></thead>
+            <tbody>
+              <tr><td>at UNC</td><td><span class="pill">W 82-74</span></td><td>+8</td></tr>
+              <tr><td>vs UVA</td><td><span class="pill">W 69-61</span></td><td>+8</td></tr>
+              <tr><td>at GT</td><td><span class="pill">W 77-66</span></td><td>+11</td></tr>
+              <tr><td>vs FSU</td><td><span class="pill">W 88-72</span></td><td>+16</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <section class="card" style="margin-top:12px;">
+        <div class="label">Player Impact (mock)</div>
+        <table>
+          <thead><tr><th>Player</th><th>Usage</th><th>TS%</th><th>On/Off Net</th></tr></thead>
+          <tbody>
+            <tr><td>#11 Guard</td><td>27.4%</td><td>59.8%</td><td>+9.1</td></tr>
+            <tr><td>#4 Wing</td><td>22.1%</td><td>61.2%</td><td>+6.4</td></tr>
+            <tr><td>#34 Big</td><td>18.5%</td><td>64.7%</td><td>+11.2</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="footer">Prototype only — static sample values for layout and workflow validation.</div>
+    </div>
+  </body>
+</html>
